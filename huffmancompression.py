@@ -101,4 +101,4 @@ for char in aList:
     tree.SearchAndCode(aNode,char, encodedString)
     print('--------------------------------------------------')
 
-
+print ("done")
