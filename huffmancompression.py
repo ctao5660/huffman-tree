@@ -24,10 +24,10 @@ class BinaryTree:
         for char in self.sortedList:
             self.nodeList.append(Node(self.freqList[char],char))
         while(True):
-            for char in self.nodeList:
-                print(char.char)
-            node1=self.nodeList.pop(len(self.nodeList)-1)
-            node2=self.nodeList.pop(len(self.nodeList)-1)
+            self.nodeList.sort(key=lambda node:node.frequency)
+            node1=self.nodeList.pop(0)
+
+            node2=self.nodeList.pop(0)
             newNode=Node(node1.frequency+node2.frequency,None)
             if(node1.frequency>=node2.frequency):
                 newNode.left=node1
@@ -55,7 +55,8 @@ class BinaryTree:
         if (rNode is None):
             return
         if (rNode.char is not None):
-            print('The character is {} and the encoded is {}'.format(rNode.char, encoded))
+            self.codeDict[rNode.char]=encoded
+            print('Character is {} and Code is {}'.format(rNode.char,encoded))
             return
         lencoded = encoded + "1"
         rencoded = encoded + "0"
@@ -66,12 +67,31 @@ class BinaryTree:
         print('{} is compared to {}'.format(rNode.char,targetChar))
         if(rNode.char!=None and rNode.char==targetChar):
             self.codeDict[targetChar]=encoded
-            print(encoded)
             return
         if(rNode.left!=None):
             self.SearchAndCode(rNode.left,targetChar,encoded+'1')
         if(rNode.right!=None):
             self.SearchAndCode(rNode.left,targetChar,encoded+'0')
+
+    def isNode(self,stringlist, node):
+        s=stringlist
+        if (node.char is not  None):
+            return True
+        if(s[0]== '1'):
+            s.pop(0)
+            return self.isNode(s,node.left)
+        elif(s[0]== '0'):
+            s.pop(0)
+            return self.isNode(s,node.right)
+        return False
+#hello
+
+    def decodeMessage(self,filelocation):
+        file_test=open(filelocation,'r+')
+        with file_test as f:
+            while True:
+                return None
+
 
 
 
@@ -81,21 +101,40 @@ class BinaryTree:
 def countChars(filelocation):
     file_test=open(filelocation,'r')
     listofchar={}
+    charCount=0
     for word in file_test.read().split():
         for char in list(word):
             if char not in listofchar:
                 listofchar[char]=1
             else:
                 listofchar[char]+=1
+            charCount+=1
+    print('Character count is {}'.format(charCount))
     return listofchar
+def encodeMessage(filelocation, tree):
+    file_test=open(filelocation,'r+')
+    numCount=0
+    for word in file_test.read().split():
+        for char in list(word):
+            numCount+=1
+            file_test.write(tree.codeDict[char])
+    print('Number of bits is {}'.format(numCount/8))
+def decodeMessage(filelocation,tree):
+    file_test=open(filelocation,'r+')
+    for digit in file_test,read().split():
+        return None
 
-aList={'a':3, 'b':12, 'c':2}
-#aList=countChars('Downloads/freshprince.txt')
+#aList={'a':54, 'b':26,'c':43, 'd':24}
+aList=countChars('/Users/christao/downloads/freshprince.txt')
 tree=BinaryTree(aList)
 aNode=tree.createTree()
 tree.SearchAndCode2(aNode,'')
+print(tree.isNode(list('1010'),aNode))
+
+#encodeMessage('/Users/christao/downloads/freshprince.txt',tree)
 #for char in aList:
  #   print (char)
   #  encodedString=''
    # tree.SearchAndCode(aNode,char, encodedString)
     #print('--------------------------------------------------')
+
