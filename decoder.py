@@ -2,7 +2,7 @@
 def getDictionary(fileLocation):
     reverseDict={}
     inputfile=open(fileLocation,'r+')
-    for line in inputfile.read().split():
+    for line in inputfile.read().split("\n"):
             separator=line.find('.-.')
             reverseDict[line[:separator]]=line[(separator+3):]
             if(line=='```'):
@@ -12,7 +12,7 @@ def intepretFile(fileLocation):
     separator=0
     string=''
     iterator=0
-    for line in inputfile.read().split():
+    for line in inputfile.read().split("\n"):
         if '```' in line:
             break
         else:
@@ -20,7 +20,7 @@ def intepretFile(fileLocation):
     inputfile.close()
 
     inputfile=open(fileLocation,'r+')
-    for line in inputfile.read().split():
+    for line in inputfile.read().split("\n"):
         if iterator>separator:
             string+=line
         iterator+=1
@@ -40,9 +40,9 @@ def decode(string, reverseDict,outputFileLocation):
             else:
                 if(reverseDict[string[index:index+indexrange]]=='\\n'):
                     s+='\n'
-                elif(
                 else:
                     s+=reverseDict[string[index:index+indexrange]]
+                    print('{} is mapped to {}'.format(string[index:index+indexrange],reverseDict[string[index:index+indexrange]]))
                 index+=indexrange
                 break
     print(s)
