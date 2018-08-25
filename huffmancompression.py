@@ -55,7 +55,7 @@ class BinaryTree:
         self.SearchAndCode2(rNode.left, lencoded)
         self.SearchAndCode2(rNode.right, rencoded)
 
-       def isNode(self,stringlist, node): #boolean that takes in string code and returns true or false based on if that code gives char
+    def isNode(self,stringlist, node): #boolean that takes in string code and returns true or false based on if that code gives char
         s=stringlist
         if (node.char is not  None):
             return True
@@ -134,7 +134,6 @@ aNode=tree.createTree()
 tree.SearchAndCode2(aNode,'')
 encodeMessage('/Users/christao/downloads/freshprince.txt','/Users/christao/downloads/testparagraph.txt',tree)
 print(tree.reverseDict)
-#tree.decodeMessage('/Users/christao/downloads/testparagraph.txt',aNode)
 
 
 
