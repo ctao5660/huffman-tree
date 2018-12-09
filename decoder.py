@@ -3,9 +3,9 @@ def getDictionary(fileLocation):
     reverseDict={}
     inputfile=open(fileLocation,'r+')
     for line in inputfile.read().split("\n"):
-            separator=line.find('.-.')
+            separator=line.find('.-.') 
             reverseDict[line[:separator]]=line[(separator+3):]
-            if(line=='```'):
+            if(line=='```'): #end of dict
                return reverseDict
 def intepretFile(fileLocation):
     inputfile=open(fileLocation,'r+')
@@ -13,7 +13,7 @@ def intepretFile(fileLocation):
     string=''
     iterator=0
     for line in inputfile.read().split("\n"):
-        if '```' in line:
+        if '```' in line: #looking for special character symbolizing end of dict
             break
         else:
             separator+=1
